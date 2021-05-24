@@ -151,7 +151,7 @@ In order access the cluster without issues after machine reboot, add the below t
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 
-#### Save your join token in a file on the Master Node, the token varies hence you need to copy your join token
+#### Save your join token in a file on the Master Node, the token varies on every system and every time you type kubeadm init, hence you need to copy your join token
 ```
 vim token
 kubeadm join 192.168.154.128:6443 --token 5zt7tp.2txcmgnuzmxtgnl \
