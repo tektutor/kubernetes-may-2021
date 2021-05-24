@@ -1,4 +1,5 @@
-### Kubernetes Pre-requisites
+# Installing your 3-Node Kubernetes Cluster in OnPrem Servers.
+
 #### Disable Virtual Memory (swap parition) in Master and Worker Nodes
 ```
 swapoff -a
@@ -193,4 +194,4 @@ kubectl get nodes
 ```
 ![Node List](https://github.com/tektutor/kubernetes-may-2021/blob/master/Day2/3NodeClusterSetup/node-list.png)
 
-If you see similar output on your systemm, your 3 node Kubernetes cluster is all set !!!
+If you see similar output on your system, your 3 node Kubernetes cluster is all set !!!
