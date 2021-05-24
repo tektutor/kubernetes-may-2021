@@ -2,11 +2,11 @@
 
 #### Disable Virtual Memory (swap parition) in Master and Worker Nodes
 ```
-swapoff -a
+sudo swapoff -a
 ```
 To permanently disable swap partition,  edit  the /etc/fstab file root user and comment the swap partition.
 ```
-vim /etc/fstab
+sudo vim /etc/fstab
 ```
 
 #### Disable SELINUX in Master and Worker Nodes
@@ -19,17 +19,17 @@ To permanently disable  SELINUX, you need to edit /etc/selinux/config file and c
 Configure the hostnames of master and all worker nodes
 In Master Node
 ```
-hostnamectl set-hostname master
+sudo hostnamectl set-hostname master
 ```
 
 In worker1 Node
 ```
-hostnamectl  set-hostname worker1
+sudo hostnamectl  set-hostname worker1
 ```
 
 In worker2 Node
 ```
-hostnamectl set-hostnamme worker2
+sudo hostnamectl set-hostnamme worker2
 ```
 
 Append the IPAddresses of master, worker1 and worker2 as shown below in /etc/hosts files. This should be done in master, worker1 and worker2 nodes.
@@ -41,7 +41,7 @@ Append the IPAddresses of master, worker1 and worker2 as shown below in /etc/hos
 
 ### Firewall configurations
 
-#### Open the below ports in Master Node
+#### Open the below ports in Master Node as root user
 ```
 firewall-cmd --permanent --add-port=6443/tcp
 firewall-cmd --permanent --add-port=2379-2380/tcp
@@ -56,7 +56,7 @@ systemctl status firewalld
 firewall-cmd --list-all
 ```
 
-#### Open the below ports in Worker Nodes
+#### Open the below ports in Worker Nodes as root user
 ```
 firewall-cmd --permanent --add-port=10250/tcp
 firewall-cmd --permanent --add-port=30000-32767/tcp
@@ -80,7 +80,7 @@ sudo usermod -aG docker user
 ```
 
 ### Configure Docker Engine to use systemd driver in Master and Worker Nodes
-vim /etc/docker/daemon.json
+sudo vim /etc/docker/daemon.json
 
 ```
 {
@@ -95,8 +95,8 @@ vim /etc/docker/daemon.json
   ]
 }
 
-mkdir -p /etc/systemd/system/docker.service.d
-systemctl daemon-reload
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo systemctl daemon-reload
 sudo systemctl enable docker && sudo systemctl start docker
 ```
 
@@ -158,6 +158,10 @@ vim token
 kubeadm join 192.168.154.128:6443 --token 5zt7tp.2txcmgnuzmxtgnl \
         --discovery-token-ca-cert-hash sha256:27758d146627cfd92079935cbaff04cb1948da37c78b2beb2fc8b15c2a5adba
 ```
+#### In case your forgot to save your join token and cleared the screen, no worries try this
+```
+kubeadm token create --print-join-command
+```
 
 #### In Master Node
 ```
@@ -166,7 +170,7 @@ kubectl get po -n kube-system -w
 ```
 Press Ctrl+C to come out of watch mode.
 
-#### Installing Calico CNI in Master Node
+ #### Installing Calico CNI in Master Node
 ```
 curl https://docs.projectcalico.org/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
