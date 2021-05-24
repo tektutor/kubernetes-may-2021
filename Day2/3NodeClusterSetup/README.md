@@ -191,3 +191,4 @@ At this point,  you are supposed to see 3 nodes in ready state.
 ```
 kubectl get nodes
 ```
+![Node List](https://github.com/tektutor/kubernetes-may-2021/blob/master/Day2/3NodeClusterSetup/node-list.png)
