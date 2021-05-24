@@ -1,4 +1,4 @@
-# Installing your 3-Node Kubernetes Cluster in OnPrem Servers.
+## Installing your 3-Node Kubernetes Cluster in OnPrem Servers
 
 #### Disable Virtual Memory (swap parition) in Master and Worker Nodes
 ```
