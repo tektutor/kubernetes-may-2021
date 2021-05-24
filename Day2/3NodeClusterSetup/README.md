@@ -184,6 +184,7 @@ Press Ctrl+C to come out of watch mode.
 kubeadm join 192.168.154.128:6443 --token 5zt7tp.2txcmgnuzmxtgnl \
         --discovery-token-ca-cert-hash sha256:27758d146627cfd92079935cbaff04cb1948da37c78b2beb2fc8b15c2a5adba
 ```
+![Worker Join Command](https://github.com/tektutor/kubernetes-may-2021/blob/master/Day2/3NodeClusterSetup/worker1-join.png)
 
 #### In Master Node
 At this point,  you are supposed to see 3 nodes in ready state.
