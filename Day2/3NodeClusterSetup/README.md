@@ -158,7 +158,7 @@ vim token
 kubeadm join 192.168.154.128:6443 --token 5zt7tp.2txcmgnuzmxtgnl \
         --discovery-token-ca-cert-hash sha256:27758d146627cfd92079935cbaff04cb1948da37c78b2beb2fc8b15c2a5adba
 ```
-#### In case your forgot to save your join token and cleared the screen, no worries try this
+#### In case your forgot to save your join token and cleared the screen, no worries try this on Master Node
 ```
 kubeadm token create --print-join-command
 ```
