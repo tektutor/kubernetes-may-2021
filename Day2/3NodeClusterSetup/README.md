@@ -31,7 +31,7 @@ In worker2 Node
 hostnamectl set-hostnamme worker2
 ```
 
-Append the IPAddresses of master, worker1 and worker2 as shown below in /etc/hosts files
+Append the IPAddresses of master, worker1 and worker2 as shown below in /etc/hosts files. This should be done in master, worker1 and worker2 nodes.
 ```
 192.168.254.129 master 
 192.168.254.130 worker1
