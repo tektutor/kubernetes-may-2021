@@ -55,7 +55,7 @@ systemctl status firewalld
 firewall-cmd --list-all
 ```
 
-### Open the below ports in Worker Nodes
+#### Open the below ports in Worker Nodes
 ```
 firewall-cmd --permanent --add-port=10250/tcp
 firewall-cmd --permanent --add-port=30000-32767/tcp
