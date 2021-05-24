@@ -175,6 +175,8 @@ kubectl apply -f calico.yaml
 ```
 kubectl get po -n kube-system -w
 ```
+![Control Plane Pods](https://github.com/tektutor/kubernetes-may-2021/blob/master/Day2/3NodeClusterSetup/K8s-controlplane-pods.png)
+
 Press Ctrl+C to come out of watch mode.
 
 #### In Worker Node
