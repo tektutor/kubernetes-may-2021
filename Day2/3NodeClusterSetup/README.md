@@ -171,7 +171,8 @@ kubectl get po -n kube-system -w
 ```
 Press Ctrl+C to come out of watch mode.
 
- #### Installing Calico CNI in Master Node
+#### Installing Calico CNI in Master Node
+To learn more about Calico CNI, refer https://docs.projectcalico.org/getting-started/kubernetes/self-managed-onprem/onpremises 
 ```
 curl https://docs.projectcalico.org/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
