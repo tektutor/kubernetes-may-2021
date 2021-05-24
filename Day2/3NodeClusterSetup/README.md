@@ -31,7 +31,7 @@ In worker2 Node
 ```
 sudo hostnamectl set-hostnamme worker2
 ```
-
+### Configure /etc/hosts file
 Append the IPAddresses of master, worker1 and worker2 as shown below in /etc/hosts files. This should be done in master, worker1 and worker2 nodes.
 ```
 192.168.254.129 master 
@@ -40,6 +40,7 @@ Append the IPAddresses of master, worker1 and worker2 as shown below in /etc/hos
 ```
 
 ### Firewall configurations
+For summary of ports that must be opened, refer official Kubernetes documention https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
 #### Open the below ports in Master Node as root user
 ```
