@@ -151,27 +151,27 @@ In order access the cluster without issues after machine reboot, add the below t
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 
-#### Save your join token in a file on the Master Node, the token varies on every system and every time you type kubeadm init, hence you need to copy your join token
+Save your join token in a file on the Master Node, the token varies on every system and every time you type kubeadm init, hence you need to save your join token for your reference before you clear your terminal screen.
 ```
 vim token
 kubeadm join 192.168.154.128:6443 --token 5zt7tp.2txcmgnuzmxtgnl \
         --discovery-token-ca-cert-hash sha256:27758d146627cfd92079935cbaff04cb1948da37c78b2beb2fc8b15c2a5adba
 ```
 
-### In Master Node
+#### In Master Node
 ```
 kubectl get nodes
 kubectl get po -n kube-system -w
 ```
 Press Ctrl+C to come out of watch mode.
 
-### Installing Calico CNI in Master Node
+#### Installing Calico CNI in Master Node
 ```
 curl https://docs.projectcalico.org/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
 ```
 
-### In Master Node watch the pod creation after installing Calico
+#### In Master Node watch the pod creation after installing Calico
 ```
 kubectl get po -n kube-system -w
 ```
@@ -192,3 +192,5 @@ At this point,  you are supposed to see 3 nodes in ready state.
 kubectl get nodes
 ```
 ![Node List](https://github.com/tektutor/kubernetes-may-2021/blob/master/Day2/3NodeClusterSetup/node-list.png)
+
+If you see similar output on your systemm, your 3 node Kubernetes cluster is all set !!!
