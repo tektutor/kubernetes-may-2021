@@ -1,19 +1,18 @@
-### Common Installation Procedure for Master and Worker Nodes
-
 ### Kubernetes Pre-requisites
-Disable Virtual Memory (swap parition)
+#### Disable Virtual Memory (swap parition) in Master and Worker Nodes
 ```
 swapoff -a
 ```
 To permanently disable swap partition,  edit  the /etc/fstab file root user and comment the swap partition.
+```
 vim /etc/fstab
 ```
-Comment out the entire line with the swap partition before saving the /etc/fstab file.
 
-Disable SELINUX
-```
+#### Disable SELINUX in Master and Worker Nodes
+``` 
 setenforce 0
 ```
+
 To permanently disable  SELINUX, you need to edit /etc/selinux/config file and change enforcing to disabled.
 
 Configure the hostnames of master and all worker nodes
@@ -41,7 +40,7 @@ Append the IPAddresses of master, worker1 and worker2 as shown below in /etc/hos
 
 ### Firewall configurations
 
-#### Open Master Node Ports in firewall
+#### Open the below ports in Master Node
 ```
 firewall-cmd --permanent --add-port=6443/tcp
 firewall-cmd --permanent --add-port=2379-2380/tcp
@@ -56,8 +55,7 @@ systemctl status firewalld
 firewall-cmd --list-all
 ```
 
-
-### Open Worker Node Ports in firewall
+### Open the below ports in Worker Nodes
 ```
 firewall-cmd --permanent --add-port=10250/tcp
 firewall-cmd --permanent --add-port=30000-32767/tcp
@@ -70,7 +68,7 @@ systemctl status firewalld
 firewall-cmd --list-all
 ```
 
-#### Install Docker CE
+#### Install Docker CE in Master and Worker Nodes
 ```
 sudo yum install -y yum-utils
 sudo yum-config-manager \
@@ -80,7 +78,7 @@ sudo yum install -y docker-e
 sudo usermod -aG docker user
 ```
 
-### Configure Docker Engine to use systemd driver
+### Configure Docker Engine to use systemd driver in Master and Worker Nodes
 vim /etc/docker/daemon.json
 
 ```
@@ -102,7 +100,7 @@ sudo systemctl enable docker && sudo systemctl start docker
 ```
 
 
-Configure IPTables to see bridge traffic
+#### Configure IPTables to see bridge traffic in Master and Worker Nodes
 ```
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 br_netfilter
@@ -115,7 +113,7 @@ EOF
 sudo sysctl --system
 ```
 
-### Install kubectl kubeadm and kubelet on Master & all worker nodes
+### Install kubectl kubeadm and kubelet on Master & Worker nodes
 ```
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
@@ -131,7 +129,7 @@ EOF
 sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 ```
 
-### Configure kubelet
+### Configure kubelet in Master and Worker Nodes
 ```
 sudo vim /etc/sysconfig/kubelet
 KUBELET_EXTRA_ARGS= --runtime-cgroups=/system//system.slice --kubelet-cgroups=/systemd/system.slice
@@ -139,8 +137,54 @@ KUBELET_EXTRA_ARGS= --runtime-cgroups=/system//system.slice --kubelet-cgroups=/s
 sudo systemctl enable --now kubelet
 ```
 
-### Bootstrapping Master Node
+### Bootstrapping Master Node as root user
 ```
 kubeadm init --pod-network-cidr=192.168.0.0/16
 
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+```
 
+In order access the cluster without issues after machine reboot, add the below to /root/.bashrc
+```
+export KUBECONFIG=/etc/kubernetes/admin.conf
+```
+
+#### Save your join token in a file on the Master Node, the token varies hence you need to copy your join token
+```
+vim token
+kubeadm join 192.168.154.128:6443 --token 5zt7tp.2txcmgnuzmxtgnl \
+        --discovery-token-ca-cert-hash sha256:27758d146627cfd92079935cbaff04cb1948da37c78b2beb2fc8b15c2a5adba
+```
+
+### In Master Node
+```
+kubectl get nodes
+kubectl get po -n kube-system -w
+```
+Press Ctrl+C to come out of watch mode.
+
+### Installing Calico CNI in Master Node
+```
+curl https://docs.projectcalico.org/manifests/calico.yaml -O
+kubectl apply -f calico.yaml
+```
+
+### In Master Node watch the pod creation after installing Calico
+```
+kubectl get po -n kube-system -w
+```
+Press Ctrl+C to come out of watch mode.
+
+#### In Worker Node
+```
+kubeadm join 192.168.154.128:6443 --token 5zt7tp.2txcmgnuzmxtgnl \
+        --discovery-token-ca-cert-hash sha256:27758d146627cfd92079935cbaff04cb1948da37c78b2beb2fc8b15c2a5adba
+```
+
+#### In Master Node
+At this point,  you are supposed to see 3 nodes in ready state.
+```
+kubectl get nodes
+```
