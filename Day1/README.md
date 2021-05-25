@@ -48,7 +48,7 @@ In case, minikube is already in path, you will get the below out
 ```
 
 In case, you are not getting the above output then make sure you type the below as a regular user(non-root).
-Edit the /home/user/.bashrc and append the below line at the end of the file
+Edit the /home/user/.bashrc and append the below line at the end of the file.
 ```
 export PATH=/usr/local/bin:$PATH
 ```
@@ -58,9 +58,30 @@ In order to apply the recently added path settings, you need to run
 source /home/user/.bashrc
 ```
 
-### Starting minkube as regular user (non-root)
+### Configuring minikube. The below steps are optional.
+```
+minikube config set cpus 4
+minikube config set memory 8192
+```
+
+### Starting minikube as regular user (non-root)
 ```
 minikube start --driver=docker
+```
+
+### Stopping minikube as a regular user (non-root)
+```
+minikube stop
+```
+
+### In case if you wish to use multi-node Kubernetes cluster in minikube
+```
+minikube start --nodes 2
+```
+
+### Deleting minikube as a regular user (non-root)
+```
+minikube delete
 ```
 
 ### Install kubectl to work with the K8s cluster
