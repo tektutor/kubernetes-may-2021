@@ -202,3 +202,16 @@ kubectl get nodes
 ![Node List](https://github.com/tektutor/kubernetes-may-2021/blob/master/Day2/3NodeClusterSetup/node-list.png)
 
 If you see similar output on your system, your 3 node Kubernetes cluster is all set !!!
+
+
+#### In case you had trouble setting up master, you could reset and try init as shown below (on master and worker nodes)
+```
+kubeadm reset
+```
+
+You need to manually remove the below folder
+```
+rm -rf /etc/cni/net.d
+rm -rf /etc/kubernetes
+rm -rf $HOME/.kube
+```
