@@ -3,7 +3,10 @@
 ## Installing minikube
 Minikube setup let's you create a light-weight Kubernetes cluster in your laptop/desktop.  Minikube doesn't require high-end machines and it works in Windows, Mac OS and Linux.
 
-Minikube is only meant to be used for learning or dev/qa environments.  <font color="red">This setup isn't recommended for Production.</font>
+Minikube is only meant to be used for learning or dev/qa environments.  This setup isn't recommended for Production environment.
+Interestingly, minikube supports lot of features which usually only works in Cloud environments.
+
+Did I tell you already? Minikube also supports multi-node configurations.
 
 ### Minikube requires Docker, hence let's install Docker Community Edition
 ```
@@ -17,7 +20,7 @@ sudo systemctl enable docker && sudo systemctl start docker
 ```
 
 Regular user(non-admin) user's will not have permission to issue docker commands by default, the below
-steps will added the 'user' into docker group.   Any user who is part of docker group will gain minimal root permissions to play with docker commands.
+steps will add the 'user' into docker group.   Any user who is part of the 'docker' group will gain minimal root permissions to play with docker commands.
 ```
 sudo usermod -aG docker user
 sudo su user
@@ -29,12 +32,12 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 ```
 
-For detailed instruction, refer the below official page
+For detailed instructions, refer the below official page
 ```
 https://minikube.sigs.k8s.io/docs/start/
 ```
 
-### Make sure minikube is in path. As regular user, type the below command
+### Make sure minikube is in path. As a regular user, type the below command
 ```
 which minikube
 ```
@@ -44,7 +47,7 @@ In case, minikube is already in path, you will get the below out
 /usr/local/bin/minikube
 ```
 
-In case, you are not getting the above output then make sure you type the below as a regular user(non-root)
+In case, you are not getting the above output then make sure you type the below as a regular user(non-root).
 Edit the /home/user/.bashrc and append the below line at the end of the file
 ```
 export PATH=/usr/local/bin:$PATH
@@ -67,7 +70,7 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin
 ```
 
-### Test if kubectl is able to communicate with Minikube cluster as regular user
+### Test if kubectl is able to communicate with Minikube cluster as a regular user
 ```
 kubectl get nodes
 kubectl get pods -n kube-system
