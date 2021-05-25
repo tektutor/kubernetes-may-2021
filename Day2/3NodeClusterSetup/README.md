@@ -86,7 +86,7 @@ sudo vim /etc/docker/daemon.json
 
 ```
 {
-  "exec-opts": ["native-cgroupdriver=systemd"],
+  "exec-opts": ["native.cgroupdriver=systemd"],
   "log-driver": "json-file",
   "logs-opts": {
      "max-size": "100m"
