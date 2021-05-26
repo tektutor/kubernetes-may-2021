@@ -8,6 +8,6 @@ COPY hello.py /hello.py
 
 WORKDIR /
 
-EXPOSE 5000 
+EXPOSE 80 
 
 CMD [ "python3", "hello.py" ]
