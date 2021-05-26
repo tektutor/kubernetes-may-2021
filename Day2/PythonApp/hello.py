@@ -1,11 +1,13 @@
-from flask import Flask
+  
+#!/usr/bin/python3
 
-app = Flask(__name__)
+import flask
 
-@app.route("/")
-def index():
-    return "Hello World!"
+app = flask.Flask( __name__ )
 
-if __name__ == "__main__":
-   app.run()
+@app.route('/', methods=['GET'])
+def sayHello():
+    return "Hello Python Microservice !"
+
+app.run(host='0.0.0.0',port=80)
 
