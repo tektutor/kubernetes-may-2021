@@ -3,7 +3,7 @@
 ## Installing minikube
 Minikube setup let's you create a light-weight Kubernetes cluster in your laptop/desktop.  Minikube doesn't require high-end machines and it works in Windows, Mac OS and Linux.
 
-Minikube is only meant to be used for learning or dev/qa environments.  This setup isn't recommended for Production environment.
+However, Minikube is only meant to be used for learning or dev/qa environments.  This setup isn't recommended for Production environment.
 Interestingly, minikube supports lot of features which usually only works in Cloud environments.
 
 Did I tell you already? Minikube also supports multi-node configurations.
