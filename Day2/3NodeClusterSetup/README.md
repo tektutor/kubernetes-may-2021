@@ -34,6 +34,25 @@ In worker2 Node
 ```
 sudo hostnamectl set-hostnamme worker2
 ```
+
+### In the master node, type the below command to find the IP Address
+```
+ifconfig ens33
+```
+Note down the IP of master node as we need to add this in the /etc/hosts later.
+
+### In the worker1 node, type the below command to find the IP Address
+```
+ifconfig ens33
+```
+Note down the IP of worker1 node as we need to add this in the /etc/hosts later.
+
+### In the worker2 node, type the below command to find the IP Address
+```
+ifconfig ens33
+```
+Note down the IP of worker2 node as we need to add this in the /etc/hosts later.
+
 ### Configure /etc/hosts file
 Append the IPAddresses of master, worker1 and worker2 as shown below in /etc/hosts files. This should be done in master, worker1 and worker2 nodes.
 ```
