@@ -159,6 +159,9 @@ sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 sudo vim /etc/sysconfig/kubelet
 KUBELET_EXTRA_ARGS= --runtime-cgroups=/systemd/system.slice --kubelet-cgroups=/systemd/system.slice
 
+```
+You may enable the kubelet service as shown below
+```
 sudo systemctl enable --now kubelet
 ```
 
