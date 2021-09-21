@@ -7,6 +7,7 @@ sudo swapoff -a
 To permanently disable swap partition,  edit  the /etc/fstab file root user and comment the swap partition.
 ```
 sudo vim /etc/fstab
+sudo systemctl daemon-reload
 ```
 
 #### Disable SELINUX in Master and Worker Nodes
