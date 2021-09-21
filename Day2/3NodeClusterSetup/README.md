@@ -124,7 +124,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable docker && sudo systemctl start docker
 ```
 
-
 #### Configure IPTables to see bridge traffic in Master and Worker Nodes
 ```
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
@@ -165,6 +164,13 @@ You may enable the kubelet service as shown below
 sudo systemctl enable --now kubelet
 ```
 
+### Restart Docker and Kubelet
+```
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo systemctl restart kubelet
+```
+
 ### Bootstrapping Master Node as root user
 ```
 kubeadm init --pod-network-cidr=192.168.0.0/16
@@ -185,6 +191,7 @@ vim token
 kubeadm join 192.168.154.128:6443 --token 5zt7tp.2txcmgnuzmxtgnl \
         --discovery-token-ca-cert-hash sha256:27758d146627cfd92079935cbaff04cb1948da37c78b2beb2fc8b15c2a5adba
 ```
+
 #### In case you forgot to save your join token and cleared the terminal screen, no worries try this on Master Node
 ```
 kubeadm token create --print-join-command
