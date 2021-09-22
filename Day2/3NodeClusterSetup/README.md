@@ -98,7 +98,7 @@ sudo yum install -y yum-utils
 sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
-sudo yum install -y docker-ce
+sudo yum install -y docker-ce --allowerasing
 sudo usermod -aG docker user
 sudo su user
 ```
